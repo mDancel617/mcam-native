@@ -1,0 +1,38 @@
+# Codemagic CI — builds the app into an installable .ipa on a cloud Mac,
+# so you never need to own a Mac. Free tier covers this.
+#
+# After it builds, download MCam.ipa and install it to your iPhone from
+# Windows with Sideloadly (see BUILD-ON-WINDOWS.md).
+#
+# The .ipa this produces is UNSIGNED on purpose — Sideloadly signs it with
+# your free Apple ID at install time. That's the no-Mac, no-paid-account route.
+
+workflows:
+  mcam-unsigned-ipa:
+    name: M-Cam unsigned IPA
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      xcode: latest
+    scripts:
+      - name: Install XcodeGen
+        script: brew install xcodegen
+      - name: Generate Xcode project
+        script: xcodegen generate
+      - name: Build (no signing)
+        script: |
+          xcodebuild \
+            -project LeicaStyleCam.xcodeproj \
+            -scheme LeicaStyleCam \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO
+      - name: Package unsigned .ipa
+        script: |
+          APP=$(find build/Build/Products/Release-iphoneos -maxdepth 1 -name "*.app" | head -1)
+          mkdir -p Payload
+          cp -R "$APP" Payload/
+          zip -r MCam.ipa Payload
+    artifacts:
+      - MCam.ipa

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>LeicaStyleCam</string>
+    <key>CFBundleDisplayName</key>
+    <string>M-Cam</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UILaunchScreen</key>
+    <dict>
+        <key>UIColorName</key>
+        <string></string>
+    </dict>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+
+    <!-- Permission strings (required or the app is rejected at launch) -->
+    <key>NSCameraUsageDescription</key>
+    <string>M-Cam uses the camera to take photos.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>M-Cam saves your photos to your library.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Not used for stills; present for completeness.</string>
+</dict>
+</plist>
